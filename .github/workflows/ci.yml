@@ -1,0 +1,73 @@
+name: integration
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Log files
+        run: |
+          ls -la
+
+      - name: Test 001-smoke.t
+        run: |
+          cd test/integration/environs && ./001-smoke.sh
+        env:
+          ENVIRON_DOCKERFILE: Dockerfile.environs.ubuntu
+          
+      - name: Test 002-autoindex-format-0.t
+        run: |
+          cd test/integration/environs && ./002-autoindex-format-0.sh
+        env:
+          ENVIRON_DOCKERFILE: Dockerfile.environs.ubuntu
+
+      - name: Test 002-autoindex-format-1.t
+        run: |
+          cd test/integration/environs && ./002-autoindex-format-1.sh
+        env:
+          ENVIRON_DOCKERFILE: Dockerfile.environs.ubuntu
+
+      - name: Test 002-autoindex-format-2.t
+        run: |
+          cd test/integration/environs && ./002-autoindex-format-2.sh
+        env:
+          ENVIRON_DOCKERFILE: Dockerfile.environs.ubuntu
+
+
+
+  opensuse_leap:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Log files
+        run: |
+          ls -la
+
+      - name: Test 001-smoke.t
+        run: |
+          cd test/integration/environs && ./001-smoke.sh
+        env:
+          ENVIRON_DOCKERFILE: Dockerfile.environs.opensuse.leap
+          
+      - name: Test 002-autoindex-format-0.t
+        run: |
+          cd test/integration/environs && ./002-autoindex-format-0.sh
+        env:
+          ENVIRON_DOCKERFILE: Dockerfile.environs.opensuse.leap
+
+      - name: Test 002-autoindex-format-2.t
+        run: |
+          cd test/integration/environs && ./002-autoindex-format-2.sh
+        env:
+          ENVIRON_DOCKERFILE: Dockerfile.environs.opensuse.leap
+
+      - name: Test 002-autoindex-format-1.t
+        run: |
+          cd test/integration/environs && ./002-autoindex-format-1.sh
+        env:
+          ENVIRON_DOCKERFILE: Dockerfile.environs.opensuse.leap
+
